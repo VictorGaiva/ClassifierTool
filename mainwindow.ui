@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1061</width>
+    <height>724</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1061</width>
+    <height>717</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1061</width>
+    <height>7170</height>
+   </size>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 10pt &quot;Open Sans&quot;;</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QFrame" name="fr_GraphicsHolder">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>1031</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>1011</width>
+       <height>431</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QCustomPlot" name="gv_Graph1"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCustomPlot" name="gv_Graph4"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCustomPlot" name="gv_Graph3"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCustomPlot" name="gv_Graph2"/>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="fr_SliderHolder">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>470</y>
+      <width>1031</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QSlider" name="sl_TimeFrameSelector">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>1011</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::handle:horizontal {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
+    border: 1px solid #5c5c5c;
+    width: 10px;
+
+    margin: 5px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+    border-radius: 4px;
+}
+QSlider::groove:horizontal {
+	background-color: rgba(0, 0, 0, 0);
+}</string>
+     </property>
+     <property name="tracking">
+      <bool>true</bool>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="invertedAppearance">
+      <bool>false</bool>
+     </property>
+     <property name="invertedControls">
+      <bool>false</bool>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::NoTicks</enum>
+     </property>
+     <property name="tickInterval">
+      <number>15</number>
+     </property>
+    </widget>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>1011</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> QProgressBar::chunk {
+     background-color: #3add36;
+     width: 1px;
+ }
+
+ QProgressBar {
+     border: 2px solid grey;
+     border-radius: 0px;
+     text-align: center;
+ }</string>
+     </property>
+     <property name="maximum">
+      <number>99</number>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="textVisible">
+      <bool>false</bool>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <zorder>progressBar</zorder>
+    <zorder>sl_TimeFrameSelector</zorder>
+   </widget>
+   <widget class="QFrame" name="fr_ClassSelectorHolder">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>570</y>
+      <width>511</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="bt_Class1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+ background-color: rgb(220, 220, 220);
+
+ border-style: solid;
+ border-width:3px;
+ border-radius:36px;
+ border-color:  rgb(160, 160, 160);
+
+ max-width:70px;
+ max-height:70px;
+ min-width:70px;
+ min-height:70px;
+ }
+ QPushButton:checked {
+ background-color: rgb(120, 120, 120);
+ }
+</string>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Class2">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+ background-color: rgb(220, 220, 220);
+
+ border-style: solid;
+ border-width:3px;
+ border-radius:36px;
+ border-color:  rgb(160, 160, 160);
+
+ max-width:70px;
+ max-height:70px;
+ min-width:70px;
+ min-height:70px;
+ }
+ QPushButton:checked {
+ background-color: rgb(120, 120, 120);
+ }
+</string>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Class3">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+ background-color: rgb(220, 220, 220);
+
+ border-style: solid;
+ border-width:3px;
+ border-radius:36px;
+ border-color:  rgb(160, 160, 160);
+
+ max-width:70px;
+ max-height:70px;
+ min-width:70px;
+ min-height:70px;
+ }
+ QPushButton:checked {
+ background-color: rgb(120, 120, 120);
+ }
+</string>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Class4">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+ background-color: rgb(220, 220, 220);
+
+ border-style: solid;
+ border-width:3px;
+ border-radius:36px;
+ border-color:  rgb(160, 160, 160);
+
+ max-width:70px;
+ max-height:70px;
+ min-width:70px;
+ min-height:70px;
+ }
+ QPushButton:checked {
+ background-color: rgb(120, 120, 120);
+ }
+</string>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Class5">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+ background-color: rgb(220, 220, 220);
+
+ border-style: solid;
+ border-width:3px;
+ border-radius:36px;
+ border-color:  rgb(160, 160, 160);
+
+ max-width:70px;
+ max-height:70px;
+ min-width:70px;
+ min-height:70px;
+ }
+ QPushButton:checked {
+ background-color: rgb(120, 120, 120);
+ }
+</string>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Class6">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+	background-color: rgb(220, 220, 220);
+
+	border-style: solid;
+	border-width:3px;
+	border-radius:36px;
+	border-color:  rgb(160, 160, 160);
+
+	max-width:70px;
+	max-height:70px;
+	min-width:70px;
+	min-height:70px;
+}
+QPushButton:checked {
+	background-color: rgb(120, 120, 120);
+}
+</string>
+     </property>
+     <property name="text">
+      <string>6</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_Classes">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>0</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 14pt;</string>
+     </property>
+     <property name="text">
+      <string>Classes</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="fr_GeneralOptHolder">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>570</y>
+      <width>511</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>2</x>
+       <y>2</y>
+       <width>501</width>
+       <height>112</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="lb_playbackSpeed">
+          <property name="text">
+           <string>Playback Speed (1.00x)</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="sl_playbackSpeed">
+          <property name="maximum">
+           <number>10</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>5</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Volume</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="sl_volumeBar">
+          <property name="sliderPosition">
+           <number>99</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+          <property name="tickInterval">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bt_Pause">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Pause</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bt_Play">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Play</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lb_CurrFile">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="bt_OpenFile">
+          <property name="text">
+           <string>Open</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="bt_Finish">
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1061</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QGraphicsView</extends>
+   <header>qcustomplot.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>sl_TimeFrameSelector</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>progressBar</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>849</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1019</x>
+     <y>545</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
