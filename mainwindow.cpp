@@ -8,23 +8,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Variables
-    this->FileIsOpen = false;
-    this->curr_position = 0;
-    this->ClassStream = QString("0,0\n");
-    this->currClass = 0;
-    this->currBT = NULL;
+    FileIsOpen = false;
+    ClassStream = QString("0,0\n");
+    currClass = 0;
+    currBT = NULL;
+    SetMaxBarValue(100);
+    SetBarValue(0);
 
     //Buttons
-    this->ui->bt_Pause->setEnabled(false);
-    this->ui->bt_Play->setEnabled(false);
+    ui->bt_Pause->setEnabled(false);
+    ui->bt_Play->setEnabled(false);
 
     //Some connects
-    connect(this->ui->bt_Class1, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
-    connect(this->ui->bt_Class2, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
-    connect(this->ui->bt_Class3, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
-    connect(this->ui->bt_Class4, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
-    connect(this->ui->bt_Class5, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
-    connect(this->ui->bt_Class6, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
+    connect(ui->bt_Class1, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
+    connect(ui->bt_Class2, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
+    connect(ui->bt_Class3, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
+    connect(ui->bt_Class4, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
+    connect(ui->bt_Class5, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
+    connect(ui->bt_Class6, &QPushButton::clicked, this, &MainWindow::setCurrentClass);
 
     //player
     player = new QMediaPlayer(this);
@@ -45,7 +46,7 @@ void MainWindow::makePlot(){
     for (int i=0; i<101; ++i)
     {
       x[i] = i/50.0 - 1;    // x goes from -1 to 1
-      y[i] = qSin(x[i]+((double)this->curr_position/10000));    //le'ts plot a sine wave
+      y[i] = qSin(x[i]+((double)this->currPosition/10000));    //le'ts plot a sine wave
     }
 
     // create graph and assign data to it:
@@ -73,14 +74,14 @@ void MainWindow::on_bt_OpenFile_clicked()
 
     try {
         //Adiciona a media ao player
-        this->player->setMedia(QUrl::fromLocalFile(fileName));
+        player->setMedia(QUrl::fromLocalFile(fileName));
 
         //Executa media
-        this->player->play();
+        player->play();
 
         //Ativa os botoes
-        this->ui->bt_Pause->setEnabled(true);
-        this->ui->bt_Play->setEnabled(true);
+        ui->bt_Pause->setEnabled(true);
+        ui->bt_Play->setEnabled(true);
 
     } catch (...) {
         qDebug() << "Could not open file " << fileName <<".";
@@ -89,12 +90,12 @@ void MainWindow::on_bt_OpenFile_clicked()
 
 void MainWindow::on_bt_Pause_clicked()
 {
-    this->player->pause();
+    player->pause();
 }
 
 void MainWindow::on_bt_Play_clicked()
 {
-    this->player->play();
+    player->play();
 }
 
 void MainWindow::on_bt_Finish_clicked()
@@ -102,29 +103,28 @@ void MainWindow::on_bt_Finish_clicked()
 
 }
 
-void MainWindow::on_positionChanged(qint64 position)
+void MainWindow::on_positionChanged(qint64 value)
 {
-    this->ui->sl_TimeFrameSelector->setValue(position);
-    this->curr_position = position;
-    MainWindow::makePlot();
-    
+    SetBarValue(value);
+    //MainWindow::makePlot();
 }
 
-void MainWindow::on_durationChanged(qint64 position)
+void MainWindow::on_durationChanged(qint64 value)
 {
-    this->ui->sl_TimeFrameSelector->setMaximum(position);
-    this->ui->sl_TimeFrameSelector->setTickInterval(15000);
+    SetMaxBarValue(value);
 }
 
 
-void MainWindow::on_sl_TimeFrameSelector_sliderMoved(int position)
+void MainWindow::on_sl_TimeFrameSelector_sliderMoved(int value)
 {
     //Mova o timeframe para a posição correta
-    this->player->setPosition(position);
+    ui->pb_ClassViwer->setValue(maxPosition - value);
+    currPosition = value;
 }
 
 void MainWindow::on_sl_volumeBar_valueChanged(int value)
 {
+    //altere o volume
     this->player->setVolume(value);
 }
 
@@ -133,21 +133,13 @@ void MainWindow::on_sl_playbackSpeed_valueChanged(int value)
     //Altera a velocidade de reprodução do audio
     qreal value2 = value;
     value2 = qPow(PB_MULTIPLIER, value2-5);
-    this->player->setPlaybackRate(value2);
+    player->setPlaybackRate(value2);
 
     //Altera a label
     QString newLabel;
     newLabel.sprintf("Playback Speed( %.2fx)",value2);
 
-    this->ui->lb_playbackSpeed->setText(newLabel);
-}
-void MainWindow::updateStuff(){
-    //if(this->FileIsOpen){
-        this->curr_position = this->player->position();
-        this->ui->sl_TimeFrameSelector->setValue( this->curr_position);
-        MainWindow::makePlot();
-    //}
-
+    ui->lb_playbackSpeed->setText(newLabel);
 }
 
 void MainWindow::setCurrentClass()
@@ -162,37 +154,67 @@ void MainWindow::setCurrentClass()
     QString Classe = buttonWidget->objectName().remove("bt_Class");
 
     //Se algum botao já estiver sendo pressionado, solte-o
-    if(this->currBT != NULL)
-        this->currBT->setChecked(false);
+    if(currBT != NULL)
+        currBT->setChecked(false);
 
     //Selecione o novo botao
-    this->currBT = qobject_cast<QPushButton*>(buttonWidget);
+    currBT = qobject_cast<QPushButton*>(buttonWidget);
     //E ative-o
-    if(this->currBT)
-        this->currBT->setChecked(true);
+    if(currBT)
+        currBT->setChecked(true);
     else{
         throw("what the fuck");
     }
 
     //Se a classe atual for diferente da classe já armazenada
-    if(Classe.toInt() != this->currClass){
+    if(Classe.toInt() != currClass){
         //Atualize-a
-        this->currClass = Classe.toInt();
+        currClass = Classe.toInt();
 
         //Atualize a string de classe
-        if(this->player->mediaStatus() !=  QMediaPlayer::NoMedia){//caso o player ja estiver executando, atualize usando o tempo atual
-            this->ClassStream.append(QString::number(this->player->position())); //insira o tempo em mili segundos
-            this->ClassStream.append(',');
-            this->ClassStream.append(Classe);
-            this->ClassStream.append('\n');
+        if(player->mediaStatus() !=  QMediaPlayer::NoMedia){//caso o player ja estiver executando, atualize usando o tempo atual
+            ClassStream.append(QString::number(player->position())); //insira o tempo em mili segundos
+            ClassStream.append(',');
+            ClassStream.append(Classe);
+            ClassStream.append('\n');
         }
         else{
-            this->ClassStream.clear();
-            this->ClassStream.append("0,");
-            this->ClassStream.append(Classe);
-            this->ClassStream.append('\n');
+            ClassStream.clear();
+            ClassStream.append("0,");
+            ClassStream.append(Classe);
+            ClassStream.append('\n');
         }
 
-        std::cout << this->ClassStream.toStdString();
+        std::cout << ClassStream.toStdString();
+    }
+}
+
+void MainWindow::SetBarValue(qint64 value){
+    ui->sl_TimeFrameSelector->setValue(value);
+    ui->pb_ClassViwer->setValue(maxPosition - value);
+    currPosition = value;
+}
+void MainWindow::SetMaxBarValue(qint64 value){
+    ui->sl_TimeFrameSelector->setMaximum(value);
+    ui->pb_ClassViwer->setMaximum(value);
+    maxPosition = value;
+}
+
+void MainWindow::on_sl_TimeFrameSelector_sliderPressed()
+{
+    //Caso haja musica tocando
+    if(player->state() != QMediaPlayer::StoppedState){
+        //Pause a reprodução
+        player->pause();
+    }
+}
+
+void MainWindow::on_sl_TimeFrameSelector_sliderReleased()
+{
+
+    if(player->state() != QMediaPlayer::StoppedState){
+        //Atualize usa posição e recomece a reprodução
+        player->setPosition(currPosition);
+        player->play();
     }
 }

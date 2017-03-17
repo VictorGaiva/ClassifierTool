@@ -21,16 +21,8 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-    //Flags
-    bool FileIsOpen;
-
-    //variables
-    QMediaPlayer *player;
-
+    ~MainWindow();   
 private slots:
-    void updateStuff();
 
     void on_bt_OpenFile_clicked();
 
@@ -54,12 +46,27 @@ private slots:
 
     void setCurrentClass();
 
+    void SetBarValue(qint64 value);
+
+    void SetMaxBarValue(qint64 value);
+
+    void on_sl_TimeFrameSelector_sliderPressed();
+
+    void on_sl_TimeFrameSelector_sliderReleased();
+
 private:
+    //Flags
+    bool FileIsOpen;
+
+    //
+    int currPosition;
+    int maxPosition;
+    int currClass;
+
+    QMediaPlayer *player;
     Ui::MainWindow *ui;
-    int curr_position;
     QTimer *timer;
     QString ClassStream;
-    int currClass;
     QPushButton* currBT;
 
 };
