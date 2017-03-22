@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1061</width>
-    <height>724</height>
+    <height>729</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -483,133 +483,200 @@ QPushButton:checked {
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QPushButton" name="bt_Pause">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
-       <x>2</x>
-       <y>2</y>
-       <width>501</width>
-       <height>112</height>
+       <x>200</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+	background-color: rgb(220, 220, 220);
+
+	border-style: solid;
+	border-width:3px;
+	border-radius:36px;
+	border-color:  rgb(160, 160, 160);
+
+	max-width:70px;
+	max-height:70px;
+	min-width:70px;
+	min-height:70px;
+}
+QPushButton:checked {
+	background-color: rgb(120, 120, 120);
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Pause</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Play">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>20</y>
+       <width>76</width>
+       <height>76</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+	font: 16pt &quot;Malgun Gothic&quot;;
+	background-color: rgb(220, 220, 220);
+
+	border-style: solid;
+	border-width:3px;
+	border-radius:36px;
+	border-color:  rgb(160, 160, 160);
+
+	max-width:70px;
+	max-height:70px;
+	min-width:70px;
+	min-height:70px;
+}
+QPushButton:checked {
+	background-color: rgb(120, 120, 120);
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Play</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>20</y>
+       <width>77</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QLabel" name="lb_playbackSpeed">
-          <property name="text">
-           <string>Playback Speed (1.00x)</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSlider" name="sl_playbackSpeed">
-          <property name="maximum">
-           <number>10</number>
-          </property>
-          <property name="singleStep">
-           <number>1</number>
-          </property>
-          <property name="pageStep">
-           <number>1</number>
-          </property>
-          <property name="value">
-           <number>5</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksAbove</enum>
-          </property>
-          <property name="tickInterval">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Volume</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSlider" name="sl_volumeBar">
-          <property name="sliderPosition">
-           <number>99</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksAbove</enum>
-          </property>
-          <property name="tickInterval">
-           <number>10</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QPushButton" name="bt_Pause">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
+       <widget class="QPushButton" name="bt_OpenFile">
         <property name="text">
-         <string>Pause</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
+         <string>Open</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="bt_Play">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
+       <widget class="QPushButton" name="bt_Finish">
         <property name="text">
-         <string>Play</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
+         <string>Save</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lb_CurrFile">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QPushButton" name="bt_OpenFile">
-          <property name="text">
-           <string>Open</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="bt_Finish">
-          <property name="text">
-           <string>Save</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
       </item>
      </layout>
+    </widget>
+    <widget class="QSlider" name="sl_playbackSpeed">
+     <property name="geometry">
+      <rect>
+       <x>4</x>
+       <y>28</y>
+       <width>181</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
+     <property name="pageStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>5</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksAbove</enum>
+     </property>
+     <property name="tickInterval">
+      <number>1</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_playbackSpeed">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>0</y>
+       <width>135</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Playback Speed (1.00x)</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_volumeBar">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>92</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Volume ( 100%)</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QSlider" name="sl_volumeBar">
+     <property name="geometry">
+      <rect>
+       <x>4</x>
+       <y>85</y>
+       <width>181</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="value">
+      <number>100</number>
+     </property>
+     <property name="sliderPosition">
+      <number>100</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksAbove</enum>
+     </property>
+     <property name="tickInterval">
+      <number>10</number>
+     </property>
     </widget>
    </widget>
   </widget>

@@ -125,7 +125,13 @@ void MainWindow::on_sl_TimeFrameSelector_sliderMoved(int value)
 void MainWindow::on_sl_volumeBar_valueChanged(int value)
 {
     //altere o volume
-    this->player->setVolume(value);
+    player->setVolume(value);
+
+    //Altera a label
+    QString newLabel;
+    newLabel.sprintf("Volume(%3d\%)",value);
+
+    ui->lb_volumeBar->setText(newLabel);
 }
 
 void MainWindow::on_sl_playbackSpeed_valueChanged(int value)
